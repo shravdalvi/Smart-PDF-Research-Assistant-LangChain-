@@ -133,59 +133,105 @@ Security is a top priority in this architecture.
 
 ---
 
-## 🛠️ Step-by-Step Setup Instructions
+## 👨‍💻 Developer Setup Instructions
 
-To run this project locally, follow these exact steps.
+Follow these step-by-step instructions to set up the project locally for development.
 
 ### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- MongoDB (Running locally on `mongodb://localhost:27017`)
-- Google Gemini API Key
 
-### 1. Backend Setup
-1. Open a terminal and navigate to the backend folder:
+Ensure you have the following installed on your machine:
+- **Git**: For version control.
+- **Python 3.10+**: For the FastAPI backend.
+- **Node.js 18+ & npm**: For the React frontend.
+- **MongoDB**: A local instance running on port `27017` or a MongoDB Atlas URI.
+- **Google Gemini API Key**: Get one from [Google AI Studio](https://aistudio.google.com/).
+
+### 0. Clone the Repository
+First, clone the project to your local machine:
+```bash
+git clone <your-repository-url>
+cd Smart-PDF-Research-Assistant-LangChain-
+```
+
+### 1. Backend Development Setup (FastAPI)
+The backend manages the AI logic, PDF processing, and database interactions.
+
+1. **Navigate to the backend directory:**
    ```bash
    cd backend
    ```
-2. Create and activate a virtual environment:
+
+2. **Create a virtual environment:**
+   This isolates the project's Python dependencies.
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
    ```
-3. Install the dependencies:
+
+3. **Activate the virtual environment:**
+   - **Linux/macOS:**
+     ```bash
+     source venv/bin/activate
+     ```
+   - **Windows (Command Prompt):**
+     ```cmd
+     venv\Scripts\activate
+     ```
+   - **Windows (PowerShell):**
+     ```powershell
+     .\venv\Scripts\Activate.ps1
+     ```
+
+4. **Install backend dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-4. Configure the environment variables:
-   Copy `.env.example` to `.env` and insert your Gemini API Key and a secure random JWT secret.
+
+5. **Configure Environment Variables:**
+   Copy the example environment file to create your own configuration.
+   ```bash
+   cp .env.example .env
+   ```
+   Open the `.env` file in your editor and fill in your details:
    ```env
    MONGO_URI=mongodb://localhost:27017
    DATABASE_NAME=smart_pdf_assistant
-   JWT_SECRET=your-very-secure-secret
+   JWT_SECRET=generate_a_secure_random_string
    JWT_ALGORITHM=HS256
    ACCESS_TOKEN_EXPIRE_MINUTES=10080
-   GEMINI_API_KEY=your-gemini-api-key-here
+   GEMINI_API_KEY=your_actual_gemini_api_key
    ```
-5. Start the FastAPI server:
+   *(Tip: You can generate a JWT secret using `openssl rand -hex 32` in your terminal)*
+
+6. **Start the backend server in development mode:**
+   The `--reload` flag ensures the server automatically restarts when you make code changes.
    ```bash
    uvicorn main:app --reload
    ```
+   *The API will be available at `http://localhost:8000` and the interactive API docs at `http://localhost:8000/docs`.*
 
-### 2. Frontend Setup
-1. Open a new terminal and navigate to the frontend folder:
+### 2. Frontend Development Setup (React/Vite)
+The frontend is the user interface built with React and Vite.
+
+1. **Open a new terminal window/tab** (leave the backend running) and navigate to the frontend directory from the project root:
    ```bash
    cd frontend
    ```
-2. Install the Node modules:
+
+2. **Install frontend dependencies:**
    ```bash
    npm install
    ```
-3. Start the Vite React server:
+
+3. **Start the Vite development server:**
    ```bash
    npm run dev
    ```
-4. Open your browser to `http://localhost:5173`, create an account, upload a PDF, and start researching!
+   *The frontend will typically run at `http://localhost:5173`. Vite provides Hot Module Replacement (HMR) for instant updates as you edit React components.*
+
+### 3. Verification
+1. Open your browser and navigate to `http://localhost:5173`.
+2. Register a new user account (this creates a record in your local MongoDB).
+3. Log in, upload a test PDF, and ask a question to verify that the RAG pipeline is successfully communicating with Gemini and ChromaDB.
 
 ---
 
