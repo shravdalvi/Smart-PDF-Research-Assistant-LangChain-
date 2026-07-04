@@ -1,5 +1,4 @@
 # Smart_PDF_Research_Assistant
-# Smart PDF Research Assistant
 
 Smart PDF Research Assistant is an AI-powered research tool designed to let users have natural-language conversations with their PDF documents instead of reading them manually. Combining Retrieval-Augmented Generation (RAG), vector search, and large language models, it enables users to ask questions, generate summaries, and create study material directly from uploaded PDFs. By grounding every answer in the actual document and citing the exact source page, it empowers researchers, students, legal professionals, and business analysts to extract knowledge faster and with full source verification.
 
